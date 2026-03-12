@@ -56,16 +56,34 @@ class CartaoDeCredito:
         print(f"• Fatura Atual:      R$ {self.valor_fatura:>8.2f}")
         print("-" * 30 + "\n")
 
-# --- Testando o Sistema ---
 cartao = CartaoDeCredito("Kaike")
 
-cartao.exibir_status()
-
-# Realizando compras
-cartao.comprar(100)
-cartao.comprar(250)
-
-# Aumentando limite
-cartao.aumentar_limite(500)
-
-cartao.exibir_status()
+while True:
+    print("\n" + "=" * 30)
+    print("MENU DO CARTÃO DE CRÉDITO")
+    print("=" * 30)
+    print("1. Ver Status")
+    print("2. Comprar")
+    print("3. Pagar Fatura")
+    print("4. Aumentar Limite")
+    print("5. Sair")
+    print("-" * 30)
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        cartao.exibir_status()
+    elif opcao == "2":
+        valor = float(input("Digite o valor da compra: R$ "))
+        cartao.comprar(valor)
+    elif opcao == "3":
+        valor = float(input("Digite o valor da fatura: R$ "))
+        cartao.pagar_fatura(valor)
+    elif opcao == "4":
+        valor = float(input("Digite o valor do aumento: R$ "))
+        cartao.aumentar_limite(valor)
+    elif opcao == "5":
+        print("\nObrigado por usar o sistema!")
+        break
+    else:
+        print("[ERRO] Opção inválida. Tente novamente.")
