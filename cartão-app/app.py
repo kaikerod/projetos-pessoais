@@ -19,3 +19,11 @@ class CartaoDeCredito:
       self._limite_disponivel -= valor
       self.valor_fatura += valor
       return True
+
+    def pagar_fatura(self, valor):
+      if valor > self.valor_fatura:
+          print("Erro: Valor maior que o da fatura")
+          return False
+      self.valor_fatura -= valor
+      self._limite_disponivel += valor
+      return True
