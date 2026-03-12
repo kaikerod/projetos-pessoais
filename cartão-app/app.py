@@ -1,9 +1,9 @@
 class CartaoDeCredito:
-    def __init__(self, titular, limite_total, limite_disponivel, valor_fatura):
+    def __init__(self, titular):
         self.titular = titular
-        self.limite_total = limite_total
-        self._limite_disponivel = limite_disponivel
-        self.valor_fatura = valor_fatura
+        self._limite_total = 2500
+        self._limite_disponivel = 2500
+        self.valor_fatura = 0
 
     def __str__(self):
       return f"Cartão de Crédito de {self.titular}"
@@ -33,3 +33,11 @@ class CartaoDeCredito:
 
     def ver_limite_total(self):
       return f'Limite total: {self.limite_total}'
+
+    def aumentar_limite(self, valor):
+      if valor > self._limite_total:
+          print("Erro: Valor maior que o limite total")
+          return False
+      self._limite_total += valor
+      self._limite_disponivel += valor
+      return True
