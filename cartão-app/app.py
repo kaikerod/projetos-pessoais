@@ -9,8 +9,8 @@ class CartaoDeCredito:
       return f"Cartão de Crédito de {self.titular}"
     
     @property
-    def limite_disponivel(self):
-      return self._limite_disponivel
+    def ver_limite_disponivel(self):
+      return f'Limite disponível: {self._limite_disponivel}'
 
     def comprar(self, valor):
       if valor > self._limite_disponivel:
@@ -27,3 +27,9 @@ class CartaoDeCredito:
       self.valor_fatura -= valor
       self._limite_disponivel += valor
       return True
+
+    def ver_fatura(self):
+      return f'Fatura atual: {self.valor_fatura}'
+
+    def ver_limite_total(self):
+      return f'Limite total: {self.limite_total}'
