@@ -15,7 +15,7 @@ class CartaoDeCredito:
         self._limite_total = 2500
         self._limite_disponivel = 2500
         self.valor_fatura = 0
-        self.historico_compras = []
+        self.historico_transacoes = []
 
     def __str__(self):
       return f"Cartão de Crédito de {self.titular}"
@@ -32,7 +32,7 @@ class CartaoDeCredito:
       console.print(f"[bold green]✅ COMPRA: R$ {valor:.2f} aprovada com sucesso![/]")
       self._limite_disponivel -= valor
       self.valor_fatura += valor
-      self.historico_compras.append((descricao, valor))
+      self.historico_transacoes.append((descricao, valor))
       return True
 
     def pagar_fatura(self, valor):
@@ -42,7 +42,7 @@ class CartaoDeCredito:
       console.print(f"[bold green]✅ PAGAMENTO: R$ {valor:.2f} realizado com sucesso![/]")
       self.valor_fatura -= valor
       self._limite_disponivel += valor
-      self.historico_compras.append(("💰 Pagamento", valor))
+      self.historico_transacoes.append(("💰 Pagamento", valor))
       return True
 
     @property
@@ -66,19 +66,19 @@ class CartaoDeCredito:
       self._limite_total += valor
       self._limite_disponivel += valor
       console.print(f"[bold green]✅ SUCESSO: Limite aumentado em R$ {valor:.2f}[/]\n")
-      self.historico_compras.append(("🚀 Aumento de limite", valor))
+      self.historico_transacoes.append(("🚀 Aumento de limite", valor))
       return True
 
     def exibir_extrato(self):
-        if not self.historico_compras:
-            console.print("[bold yellow]Nenhuma compra realizada ainda.[/]\n")
+        if not self.historico_transacoes:
+            console.print("[bold yellow]Nenhuma transação realizada ainda.[/]\n")
             return
         
         table = Table(show_header=True, header_style="bold magenta", expand=True)
         table.add_column("Descrição", style="cyan")
         table.add_column("Valor", style="bold green", justify="right")
         
-        for descricao, valor in self.historico_compras:
+        for descricao, valor in self.historico_transacoes:
             table.add_row(descricao, f"R$ {valor:.2f}")
         
         panel = Panel(
