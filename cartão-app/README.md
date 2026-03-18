@@ -5,10 +5,11 @@ Este é um projeto simples em Python que simula o gerenciamento de um cartão de
 ## 🚀 Funcionalidades
 
 - **Consulta de Status:** Visualize de forma clara o seu limite total, limite disponível e o valor atual da fatura.
-- **Realização de Compras:** Simule compras abatendo o valor do limite disponível e aumentando a fatura.
+- **Realização de Compras com Categorias:** Simule compras escolhendo entre categorias (Alimentação, Saúde, Mercado, etc.) para melhor organização.
 - **Pagamento de Fatura:** Realize o pagamento total ou parcial da fatura para reestabelecer seu limite.
 - **Solicitação de Aumento de Limite:** Tente aumentar seu limite total (com regras de negócio baseadas no uso).
-- **Extrato Detalhado:** Acompanhe o histórico completo de transações (compras e pagamentos) em uma tabela organizada.
+- **Extrato Detalhado:** Acompanhe o histórico completo de transações em uma tabela organizada.
+- **Visualização por Categoria:** Veja seus gastos agrupados por categoria com subtotais automáticos para cada uma.
 - **Interface Interativa:** Menu intuitivo com feedbacks coloridos para erros e sucessos.
 
 ## 🛠️ Tecnologias Utilizadas
