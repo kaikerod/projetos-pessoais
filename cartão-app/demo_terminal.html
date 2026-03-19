@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Demo - Cartão App</title>
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --text-color: #f1f1f1;
+            --cyan: #00ffff;
+            --magenta: #ff00ff;
+            --green: #00ff00;
+            --yellow: #ffff00;
+            --red: #ff0000;
+            --blue: #0000ff;
+            --dim: #888;
+        }
+
+        body {
+            background-color: #1e1e1e;
+            color: var(--text-color);
+            font-family: 'Cascadia Code', 'Courier New', Courier, monospace;
+            font-size: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #terminal {
+            background-color: var(--bg-color);
+            width: 1100px;
+            height: 700px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border: 2px solid #444;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .line {
+            margin-bottom: 5px;
+            min-height: 1.2em;
+            white-space: pre-wrap;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .cyan {
+            color: var(--cyan);
+        }
+
+        .magenta {
+            color: var(--magenta);
+        }
+
+        .green {
+            color: var(--green);
+        }
+
+        .yellow {
+            color: var(--yellow);
+        }
+
+        .red {
+            color: var(--red);
+        }
+
+        .blue {
+            color: var(--blue);
+        }
+
+        .dim {
+            color: var(--dim);
+        }
+
+        .panel {
+            border: 2px solid var(--blue);
+            padding: 15px;
+            display: inline-block;
+            margin: 15px 0;
+        }
+
+        .panel-title {
+            position: absolute;
+            background: var(--bg-color);
+            margin-top: -30px;
+            padding: 0 10px;
+            color: var(--blue);
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 1px solid #333;
+            color: var(--magenta);
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 24px;
+            background-color: var(--text-color);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        #input-area {
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: var(--yellow);
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="terminal">
+        <div id="output"></div>
+        <div id="input-line" style="display:none;">
+            <span id="prompt-text" class="bold yellow"></span>
+            <span id="user-input" class="yellow"></span><span class="cursor"></span>
+        </div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const inputLine = document.getElementById('input-line');
+        const promptText = document.getElementById('prompt-text');
+        const userInput = document.getElementById('user-input');
+
+        function print(html) {
+            const div = document.createElement('div');
+            div.className = 'line';
+            div.innerHTML = html;
+            output.appendChild(div);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function clear() {
+            output.innerHTML = '';
+        }
+
+        async function type(text, element, speed = 100) {
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text[i];
+                output.scrollTop = output.scrollHeight;
+                await new Promise(r => setTimeout(r, speed));
+            }
+        }
+
+        async function showMenu() {
+            const menu = `
+<div class="panel">
+    <div class="panel-title">[bold blue]MENU DO CARTÃO DE CRÉDITO[/]</div>
+    <span class="cyan bold">1.</span> Ver Status<br>
+    <span class="cyan bold">2.</span> Comprar<br>
+    <span class="cyan bold">3.</span> Pagar Fatura<br>
+    <span class="cyan bold">4.</span> Aumentar Limite<br>
+    <span class="cyan bold">5.</span> Ver Extrato<br>
+    <span class="cyan bold">6.</span> <span class="red bold">Sair</span>
+</div>`;
+            print(menu.replace(/\[bold blue\]/g, '<span class="blue bold">').replace(/\[\/\]/g, '</span>'));
+        }
+
+        async function showStatus() {
+            const table = `
+<div class="panel" style="border-color: var(--cyan); width: 90%;">
+    <div class="panel-title" style="color: var(--cyan);">💳 Resumo do Cartão: <span class="yellow bold">KAIKE</span></div>
+    <table>
+        <thead>
+            <tr><th>Descrição</th><th style="text-align:right">Valor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td class="cyan">Limite Total</td><td class="green" style="text-align:right">R$ 2500.00</td></tr>
+            <tr><td class="cyan">Limite Disponível</td><td class="green" style="text-align:right">R$ 2500.00</td></tr>
+            <tr><td class="cyan">Fatura Atual</td><td class="red bold" style="text-align:right">R$ 0.00</td></tr>
+        </tbody>
+    </table>
+</div>`;
+            print(table);
+        }
+
+        async function showPurchaseSuccess() {
+            print('<span class="green bold">✅ COMPRA: R$ 150.00 aprovada com sucesso!</span>');
+        }
+
+        async function showExtrato() {
+            const table = `
+<div class="panel" style="border-color: var(--cyan); width: 90%;">
+    <div class="panel-title" style="color: var(--cyan);">💳 Extrato do Cartão: <span class="yellow bold">KAIKE</span></div>
+    <table>
+        <thead>
+            <tr><th>Descrição</th><th style="text-align:right">Valor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td class="cyan">🛍️ Compra - Jantar</td><td class="green" style="text-align:right">R$ 150.00</td></tr>
+        </tbody>
+    </table>
+</div>`;
+            print(table);
+        }
+
+        async function showPaymentSuccess() {
+            print('<span class="green bold">✅ PAGAMENTO: R$ 50.00 realizado com sucesso!</span>');
+        }
+
+        async function showLimitSuccess() {
+            print('<span class="green bold">✅ SUCESSO: Limite aumentado em R$ 200.00</span>');
+        }
+
+        async function showFinalStatus() {
+            const table = `
+<div class="panel" style="border-color: var(--cyan); width: 90%;">
+    <div class="panel-title" style="color: var(--cyan);">💳 Resumo do Cartão: <span class="yellow bold">KAIKE</span></div>
+    <table>
+        <thead>
+            <tr><th>Descrição</th><th style="text-align:right">Valor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td class="cyan">Limite Total</td><td class="green" style="text-align:right">R$ 2700.00</td></tr>
+            <tr><td class="cyan">Limite Disponível</td><td class="green" style="text-align:right">R$ 2600.00</td></tr>
+            <tr><td class="cyan">Fatura Atual</td><td class="red bold" style="text-align:right">R$ 100.00</td></tr>
+        </tbody>
+    </table>
+</div>`;
+            print(table);
+        }
+
+        async function showFinalExtrato() {
+            const table = `
+<div class="panel" style="border-color: var(--cyan); width: 90%;">
+    <div class="panel-title" style="color: var(--cyan);">💳 Extrato do Cartão: <span class="yellow bold">KAIKE</span></div>
+    <table>
+        <thead>
+            <tr><th>Descrição</th><th style="text-align:right">Valor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td class="cyan">🛍️ Compra - Jantar</td><td class="green" style="text-align:right">R$ 150.00</td></tr>
+            <tr><td class="cyan">💰 Pagamento</td><td class="green" style="text-align:right">R$ 50.00</td></tr>
+            <tr><td class="cyan">🚀 Aumento de limite</td><td class="green" style="text-align:right">R$ 200.00</td></tr>
+        </tbody>
+    </table>
+</div>`;
+            print(table);
+        }
+
+        async function runDemo() {
+            const delay = 2000;
+            const typeSpeed = 150;
+
+            await new Promise(r => setTimeout(r, 1500));
+
+            // 1. Ver Status
+            await showMenu();
+            inputLine.style.display = 'block';
+            promptText.textContent = 'Escolha uma opção: ';
+            await type('1', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+            inputLine.style.display = 'none';
+            clear();
+            await showStatus();
+            await new Promise(r => setTimeout(r, delay));
+
+            // 2. Comprar
+            await showMenu();
+            inputLine.style.display = 'block';
+            promptText.innerHTML = '<span class="yellow bold">Escolha uma opção: </span>';
+            await type('2', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            clear();
+            promptText.innerHTML = '<span class="cyan bold">Digite a descrição da compra</span>: ';
+            await type('Jantar', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            promptText.innerHTML = '<span class="green bold">Digite o valor da compra (R$): </span>';
+            await type('150.00', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            inputLine.style.display = 'none';
+            await showPurchaseSuccess();
+            await new Promise(r => setTimeout(r, delay));
+
+            // 3. Pagar Fatura
+            await showMenu();
+            inputLine.style.display = 'block';
+            promptText.innerHTML = '<span class="yellow bold">Escolha uma opção: </span>';
+            await type('3', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            clear();
+            promptText.innerHTML = '<span class="green bold">Digite o valor do pagamento da fatura (R$): </span>';
+            await type('50.00', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            inputLine.style.display = 'none';
+            await showPaymentSuccess();
+            await new Promise(r => setTimeout(r, delay));
+
+            // 4. Aumentar Limite
+            await showMenu();
+            inputLine.style.display = 'block';
+            promptText.innerHTML = '<span class="yellow bold">Escolha uma opção: </span>';
+            await type('4', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            clear();
+            promptText.innerHTML = '<span class="green bold">Digite o valor do aumento de limite (R$): </span>';
+            await type('200.00', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+
+            inputLine.style.display = 'none';
+            await showLimitSuccess();
+            await new Promise(r => setTimeout(r, delay));
+
+            // 5. Ver Extrato
+            await showMenu();
+            inputLine.style.display = 'block';
+            promptText.innerHTML = '<span class="yellow bold">Escolha uma opção: </span>';
+            await type('5', userInput, typeSpeed);
+            await new Promise(r => setTimeout(r, 800));
+            userInput.textContent = '';
+            inputLine.style.display = 'none';
+            clear();
+            await showFinalExtrato();
+            await new Promise(r => setTimeout(r, delay));
+
+            // Final: Novo Status e Sair
+            clear();
+            await showFinalStatus();
+            await new Promise(r => setTimeout(r, 2000));
+
+            print('<span class="blue bold">🌟 Obrigado por usar o sistema!</span>');
+        }
+
+        runDemo();
+    </script>
+</body>
+
+</html>
