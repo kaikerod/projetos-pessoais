@@ -2,6 +2,8 @@
 
 Este é um projeto simples de um card de produto para um "Morning Set" de café e cookies, com um design limpo e moderno.
 
+### [✨ Veja a demonstração no Navegador ✨](index.html)
+
 ## 🚀 Como executar
 Basta abrir o arquivo `index.html` em qualquer navegador web.
 
@@ -15,6 +17,8 @@ Basta abrir o arquivo `index.html` em qualquer navegador web.
 # Coffe Morning Set ☕
 
 This is a simple product card project for a coffee and cookies "Morning Set", featuring a clean and modern design.
+
+### [✨ Check the Live Demo in your Browser ✨](index.html)
 
 ## 🚀 How to run
 Just open the `index.html` file in any web browser.

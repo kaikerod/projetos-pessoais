@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise de Vendas — Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Use the internal CSS from the main app -->
+  <link rel="stylesheet" href="templates/index.html"> <!-- This won't work directly, so I'll include the essential styles -->
+  <style>
+    /* Essential styles copied from index.html for the static demo */
+    :root {
+      --bg-primary: #0f0f1a; --bg-secondary: #1a1a2e; --bg-card: #16213e;
+      --accent: #6c63ff; --accent-glow: rgba(108, 99, 255, .35); --accent-secondary: #00d2ff;
+      --text-primary: #e8e8f0; --text-secondary: #9a9ab0; --text-muted: #6b6b80;
+      --success: #00e676; --radius: 14px; --shadow: 0 8px 32px rgba(0, 0, 0, .35);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); margin: 0; padding: 2rem; }
+    .app { max-width: 1000px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    header h1 { font-size: 2.2rem; background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+    .metric-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 1.5rem; position: relative; }
+    .metric-card .label { font-size: .8rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: .5rem; }
+    .metric-card .value { font-size: 1.5rem; font-weight: 700; }
+    .section { background: var(--bg-card); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 1rem; color: var(--text-muted); font-size: .8rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text-secondary); }
+    .badge { padding: .2rem .6rem; border-radius: 20px; font-size: .75rem; background: rgba(108,99,255,0.12); color: #a5a0ff; }
+    .demo-banner { background: #6c63ff; color: white; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 20px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="demo-banner">✨ MODO DEMONSTRAÇÃO (Estático)</div>
+    <header>
+      <h1>📊 Análise de Vendas</h1>
+      <p>Gerenciamento e análise de performance</p>
+    </header>
+
+    <div class="metrics">
+      <div class="metric-card"><div class="label">Total de Vendas</div><div class="value">R$ 15.420,00</div></div>
+      <div class="metric-card"><div class="label">Qtd. de Vendas</div><div class="value">42</div></div>
+      <div class="metric-card"><div class="label">Mais Vendido</div><div class="value">Notebook Pro</div></div>
+      <div class="metric-card"><div class="label">Mais Lucrativo</div><div class="value">Monitor 4K</div></div>
+    </div>
+
+    <div class="section">
+      <h2 style="font-size: 1.1rem; margin-bottom: 1rem;">Vendas Recentes</h2>
+      <table>
+        <thead><tr><th>Produto</th><th>Valor</th><th>Data</th></tr></thead>
+        <tbody>
+          <tr><td>Notebook Pro</td><td><span class="badge">R$ 4.500,00</span></td><td>2024-03-18</td></tr>
+          <tr><td>Monitor 4K</td><td><span class="badge">R$ 2.800,00</span></td><td>2024-03-17</td></tr>
+          <tr><td>Teclado Mecânico</td><td><span class="badge">R$ 450,00</span></td><td>2024-03-15</td></tr>
+          <tr><td>Mouse Gamer</td><td><span class="badge">R$ 250,00</span></td><td>2024-03-14</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">
+      <a href="../portfolio/index.html" style="color: var(--accent); text-decoration: none;">← Voltar ao Portfólio</a>
+    </p>
+  </div>
+</body>
+</html>

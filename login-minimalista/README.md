@@ -2,6 +2,8 @@
 
 Uma tela de login moderna e minimalista, focada em uma interface limpa e responsiva.
 
+### [✨ Veja a demonstração no Navegador ✨](index.html)
+
 ## 🚀 Como executar
 Abra o arquivo `index.html` em seu navegador de preferência.
 
@@ -15,6 +17,8 @@ Abra o arquivo `index.html` em seu navegador de preferência.
 # Minimalist Login 👤
 
 A modern and minimalist login screen, focused on a clean and responsive interface.
+
+### [✨ Check the Live Demo in your Browser ✨](index.html)
 
 ## 🚀 How to run
 Open the `index.html` file in your preferred web browser.

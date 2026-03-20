@@ -2,6 +2,8 @@
 
 Um clone simplificado da interface da Apple, com foco em layout limpo, tipografia característica e seções de produtos (como o iPhone 14).
 
+### [✨ Veja a demonstração no Navegador ✨](index.html)
+
 ## 🚀 Como executar
 Basta abrir o arquivo `index.html` em seu navegador.
 
@@ -15,6 +17,8 @@ Basta abrir o arquivo `index.html` em seu navegador.
 # Apple Clone 🍏
 
 A simplified clone of the Apple website interface, focusing on a clean layout, characteristic typography, and product sections (such as iPhone 14).
+
+### [✨ Check the Live Demo in your Browser ✨](index.html)
 
 ## 🚀 How to run
 Just open the `index.html` file in your browser.

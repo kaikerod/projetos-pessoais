@@ -1,6 +1,8 @@
-# 💳 Simulador de Cartão de Crédito
+Este é um projeto simples em Python que simula o gerenciamento de um cartão de crédito via terminal.
 
-Este é um projeto simples em Python que simula o gerenciamento de um cartão de crédito via terminal. A aplicação utiliza a biblioteca **Rich** para proporcionar uma interface de usuário elegante, colorida e interativa diretamente no console.
+### [✨ Veja a demonstração do Terminal no Navegador ✨](demo_terminal.html)
+
+A aplicação utiliza a biblioteca **Rich** para proporcionar uma interface de usuário elegante, colorida e interativa diretamente no console.
 
 ## 🚀 Funcionalidades
 
@@ -49,7 +51,11 @@ Desenvolvido por **Kaike**.
 
 # 💳 Credit Card Simulator
 
-This is a simple Python project that simulates credit card management via the terminal. The application uses the **Rich** library to provide an elegant, colorful, and interactive user interface directly in the console.
+This is a simple Python project that simulates credit card management via the terminal.
+
+### [✨ Check the Terminal Demo in your Browser ✨](demo_terminal.html)
+
+The application uses the **Rich** library to provide an elegant, colorful, and interactive user interface directly in the console.
 
 ## 🚀 Features
 

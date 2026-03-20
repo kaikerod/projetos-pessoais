@@ -5,6 +5,8 @@ Dashboard web para gerenciar e analisar vendas de produtos, construído com **Py
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)
 
+### [✨ Veja a demonstração interativa (Web) ✨](demo.html)
+
 ---
 
 ## ✨ Funcionalidades
@@ -109,6 +111,8 @@ Web dashboard to manage and analyze product sales, built with **Python/Flask** a
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)
+
+### [✨ Check the interactive demo (Web) ✨](demo.html)
 
 ---
 
